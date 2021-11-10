@@ -1,5 +1,6 @@
 import { Sort } from "../../common";
 
+// 核心：将未排序数组中最小的值放到未排序的最前面（已排序的最后面）
 export class Selection extends Sort {
     static sort(a: Array<any>): void {
         let N: number = a.length;

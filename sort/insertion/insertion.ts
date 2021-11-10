@@ -1,5 +1,6 @@
 import { Sort } from "../../common";
 
+// 核心：将当前值按大小插入到数组对应位置
 export class Insertion extends Sort {
     static sort(a: Array<any>): void {
         let N: number = a.length;
