@@ -22,7 +22,7 @@ export abstract class Comparable {
 
 // 排序抽象类
 export abstract class Sort {
-    static sort(a: Array<any>): void {}
+    static sort(a: Array<any>): void { }
 
     static less(v: any, w: any): boolean {
         if (v instanceof Comparable && w instanceof Comparable) {
@@ -46,7 +46,7 @@ export abstract class Sort {
         for (let i = 0; i < a.length; i++) {
             str += `${a[i]} `
         }
-        console.log('value', str);
+        console.log('sorted', str);
     }
 
     static isSorted(a: Array<any>): boolean {
@@ -60,4 +60,12 @@ export abstract class Sort {
 
 export function getType(ins: any) {
     return Object.prototype.toString.call(ins).replace(/^\[object (\S+)\]$/, '$1');
+}
+
+export function shuffle(a: Array<any>): void {
+    const N = a.length;
+    for (let i = 0; i < N; i++) {
+        const j = Math.floor(Math.random() * (N - 1))
+        Sort.exch(a, i, j)
+    }
 }
