@@ -16,8 +16,8 @@ export class Counter {
 }
 
 // 比较抽象类
-export abstract class Comparable {
-    abstract compareTo(x: Comparable): number
+export interface Comparable {
+    compareTo(x: Comparable): number
 }
 
 // 排序抽象类
@@ -25,7 +25,7 @@ export abstract class Sort {
     static sort(a: Array<any>): void { }
 
     static less(v: any, w: any): boolean {
-        if (v instanceof Comparable && w instanceof Comparable) {
+        if (isComparable(v as Comparable) && isComparable(w as Comparable)) {
             return v.compareTo(w) < 0;
         } else if ((getType(v) === 'String' && getType(w) === 'String') || (getType(v) === 'Number' && getType(w) === 'Number')) {
             return v < w;
@@ -68,4 +68,8 @@ export function shuffle(a: Array<any>): void {
         const j = Math.floor(Math.random() * (N - 1))
         Sort.exch(a, i, j)
     }
+}
+
+export function isComparable(object: Comparable) : boolean {
+    return  typeof object.compareTo === 'function'
 }
