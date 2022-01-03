@@ -35,7 +35,7 @@ export function Flips(times: number) {
 // Counter 类的用例，模拟T次掷骰子
 export function Rolls(times: number) {
     const SIDES: number = 6,
-        rolls: Array<Counter> = [];
+        rolls: Counter[] = [];
     for (let i: number = 0; i < SIDES; i++) {
         rolls.push(new Counter(i + '\'s'));
     }

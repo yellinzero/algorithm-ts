@@ -2,7 +2,7 @@ import { Sort } from "../../common";
 
 // 核心：插入排序分成多个子数组进行排序(h有序数组)（由大及小，当h为1时，则数组排序完成）
 export class Shell extends Sort {
-    static sort(a: Array<any>): void {
+    static sort(a: any[]): void {
         const N = a.length;
         let h = 1;
         // 自定义的递增序列

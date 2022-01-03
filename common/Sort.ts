@@ -2,10 +2,10 @@ import { isComparable, Comparable } from "./Comparable";
 import { getType } from "./utils";
 // 排序抽象类
 export abstract class Sort {
-    static sort(a: Array<any>): void { }
+    static sort(a: any[]): void { }
 
     static less(v: any, w: any): boolean {
-        if (isComparable(v as Comparable) && isComparable(w as Comparable)) {
+        if (isComparable(v) && isComparable(w)) {
             return v.compareTo(w) < 0;
         } else if ((getType(v) === 'String' && getType(w) === 'String') || (getType(v) === 'Number' && getType(w) === 'Number')) {
             return v < w;
@@ -15,13 +15,13 @@ export abstract class Sort {
         }
     }
 
-    static exch(a: Array<any>, i: number, j: number): void {
+    static exch(a: any[], i: number, j: number): void {
         const t = a[i];
         a[i] = a[j];
         a[j] = t;
     }
 
-    static show(a: Array<any>): void {
+    static show(a: any[]): void {
         let str: string = ''
         for (let i = 0; i < a.length; i++) {
             str += `${a[i]} `
@@ -29,7 +29,7 @@ export abstract class Sort {
         console.log('sorted', str);
     }
 
-    static isSorted(a: Array<any>): boolean {
+    static isSorted(a: any[]): boolean {
         for (let i = 1; i < a.length; i++) {
             if (this.less(a[i], a[i - 1])) return false;
         }

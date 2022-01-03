@@ -1,6 +1,6 @@
 import { Sort } from "../../common";
 class MergeFn extends Sort {
-    static aux: Array<any>
+    static aux: any[]
     static merge(a: any, lo: number, mid: number, hi: number) {
         let i = lo, j = mid + 1;
         for (let k = lo; k <= hi; k++) {
@@ -17,8 +17,8 @@ class MergeFn extends Sort {
 
 // 核心：自顶向下归并，从大数组开始排序归并 1-2-4-8……（区别在于，这里是1个数组分成2个数组分成4个数组）
 export class Merge extends MergeFn {
-    static aux: Array<any>
-    static sort(a: Array<any>, lo?: number, hi?: number): void {
+    static aux: any[]
+    static sort(a: any[], lo?: number, hi?: number): void {
         if (lo === undefined && hi === undefined) {
             this.aux = new Array(a.length)
             this.sort(a, 0, a.length - 1)
@@ -36,8 +36,8 @@ export class Merge extends MergeFn {
 
 // 核心：自底向上归并，从小数组开始归并，1-2-4-8……（这里是长度为1的数组->长度为2个数组）
 export class MergeBU extends MergeFn {
-    static aux: Array<any>
-    static sort(a: Array<any>): void {
+    static aux: any[]
+    static sort(a: any[]): void {
         const N = a.length;
         this.aux = new Array(N)
         for (let sz = 1; sz < N; sz = sz + sz) {

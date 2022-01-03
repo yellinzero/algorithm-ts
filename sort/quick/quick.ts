@@ -2,7 +2,7 @@ import { Sort, shuffle, Comparable } from "../../common";
 
 // 核心：大的右边，小的左边，切分元素在中间，反复长度递减切分，只要每一个元素左小右大则整个数组有序
 export class Quick extends Sort {
-    static sort(a: Array<any>, lo?: number, hi?: number): void {
+    static sort(a: any[], lo?: number, hi?: number): void {
         if (lo === undefined && hi === undefined) {
             shuffle(a);
             this.sort(a, 0, a.length - 1)
@@ -15,7 +15,7 @@ export class Quick extends Sort {
             console.error('参数错误')
         }
     }
-    static partition(a: Array<any>, lo: number, hi: number): number {
+    static partition(a: any[], lo: number, hi: number): number {
         let i = lo, j = hi + 1;
         let v = a[lo];
         while (true) {
@@ -32,7 +32,7 @@ export class Quick extends Sort {
 
 
 export class Quick3way extends Sort {
-    static sort(a: Array<Comparable>, lo?: number, hi?: number): void {
+    static sort(a: Comparable[], lo?: number, hi?: number): void {
         if (lo === undefined && hi === undefined) {
             shuffle(a);
             this.sort(a, 0, a.length - 1)

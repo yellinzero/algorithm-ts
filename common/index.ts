@@ -2,12 +2,15 @@
 import { Sort } from "./Sort";
 import { MaxPQ } from "./PriorityQueue";
 // 工具方法
-import { shuffle } from "./utils";
+import { shuffle, getType } from "./utils";
 // 工具类
-import { Comparable } from "./Comparable";
+import { Comparable, isComparable } from "./Comparable";
 
-export { 
-    Sort, 
-    MaxPQ, 
-    shuffle, 
-    Comparable }
+export {
+    Sort,
+    MaxPQ,
+    shuffle,
+    getType,
+    Comparable,
+    isComparable
+}
