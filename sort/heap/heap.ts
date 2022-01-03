@@ -21,6 +21,7 @@ export class Heap<T> extends MaxPQ<T> {
         return this.N;
     }
 
+    // 插入数据，从最尾端上浮
     public insert(v: T): void {
         this.pq[++this.N] = v;
         this.swim(this.N);
@@ -30,6 +31,10 @@ export class Heap<T> extends MaxPQ<T> {
         return this.pq[1];
     }
 
+    /** 
+     * 删除并输出最大元素 
+     * 将最大元素输出后置于数组最后清除，将最后元素置于堆最上放进行下沉重新排序
+     */
     public delMax(): T {
         const max = this.pq[1];
         this.exch(1, this.N--);
@@ -56,6 +61,9 @@ export class Heap<T> extends MaxPQ<T> {
         this.pq[j] = t;
     }
 
+    /** 
+     * 上浮：若父节点比当前节点小则交换两节点，否则结束上浮
+     */
     private swim(k: number): void {
         while (k > 1 && this.less(k / 2, k)) {
             this.exch(k / 2, k);
@@ -63,10 +71,16 @@ export class Heap<T> extends MaxPQ<T> {
         }
     }
 
+    /** 
+     * 下沉：
+     * 先选出儿子节点中最大的
+     * 当前节点小于儿子节点中最大的，则互相交换
+     * 否则结束下沉
+     */
     private sink(k: number): void {
         while (2 * k <= this.N) {
             let j: number = 2 * k;
-            if (j < this.N && this.less(j, j++)) j++;
+            if (j < this.N && this.less(j, j+1)) j++;
             if (!this.less(k, j)) break;
             this.exch(k, j);
             k = j;
