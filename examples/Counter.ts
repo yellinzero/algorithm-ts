@@ -1,4 +1,19 @@
-import { Counter } from "../common";
+// 计算类
+class Counter {
+    countNum: number;
+    constructor(public id?: string) {
+        this.countNum = 0;
+    }
+    increment() {
+        this.countNum++;
+    }
+    tally(): number {
+        return this.countNum;
+    }
+    toString(): string {
+        return this.countNum + ' ' + this.id;
+    }
+}
 
 // Counter 类的用例，模拟T次掷硬币
 export function Flips(times: number) {
