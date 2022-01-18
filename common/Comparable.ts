@@ -4,5 +4,5 @@ export interface Comparable {
 }
 
 export function isComparable(object: Comparable | unknown): object is Comparable {
-    return (<Comparable>object).compareTo !== undefined;
+    return (<Comparable>object)?.compareTo !== undefined;
 }
