@@ -1,5 +1,5 @@
 #!/usr/bin/env ts-node
-import sort from './heap'
+import { sort } from './heap'
 const fs = require('fs')
 const argvs = process.argv.splice(2);
 // examples

@@ -1,10 +1,10 @@
 #!/usr/bin/env ts-node
 // todo: 内存消耗计算
 const argvs = process.argv.splice(2);
-import Sort from "./index";
+import * as Sort from "./index";
 class SortCompare {
     static time(alg: string, a: any): number {
-        const startTime: number =  Number(process.hrtime.bigint().toString()) / 1000000;
+        const startTime: number = Number(process.hrtime.bigint().toString()) / 1000000;
         switch (alg) {
             case 'Insertion':
                 Sort.Insertion.sort(a);
@@ -29,7 +29,7 @@ class SortCompare {
                 break;
 
         }
-        const endTime: number =  Number(process.hrtime.bigint().toString()) / 1000000;
+        const endTime: number = Number(process.hrtime.bigint().toString()) / 1000000;
         return endTime - startTime;
     }
 

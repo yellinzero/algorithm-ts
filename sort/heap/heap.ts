@@ -3,7 +3,7 @@ import { isComparable, Comparable, getType } from '../../common/index'
  *核心：利用堆优先队列实现排序
  */
 
-export default function sort(a: any[]): void {
+export function sort(a: any[]): void {
     let N = a.length;
     for (let k = Math.floor(N / 2); k >= 1; k--) sink(a, k, N);
     while (N > 1) {
