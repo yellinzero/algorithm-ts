@@ -1,48 +1,48 @@
 // 计算类
 class Counter {
-    countNum: number;
+    countNum: number
     constructor(public id?: string) {
-        this.countNum = 0;
+        this.countNum = 0
     }
     increment() {
-        this.countNum++;
+        this.countNum++
     }
     tally(): number {
-        return this.countNum;
+        return this.countNum
     }
     toString(): string {
-        return this.countNum + ' ' + this.id;
+        return this.countNum + ' ' + this.id
     }
 }
 
 // Counter 类的用例，模拟T次掷硬币
 export function Flips(times: number) {
     const heads: Counter = new Counter("heads"),
-        tails: Counter = new Counter("tails");
+        tails: Counter = new Counter("tails")
     for (let t: number = 0; t < times; t++) {
         if (Math.round(Math.random())) {
-            heads.increment();
+            heads.increment()
         } else {
-            tails.increment();
+            tails.increment()
         }
     }
-    console.log(heads.toString());
-    console.log(tails.toString());
-    const d = heads.tally() - tails.tally();
-    console.log("delta: " + Math.abs(d));
+    console.log(heads.toString())
+    console.log(tails.toString())
+    const d = heads.tally() - tails.tally()
+    console.log("delta: " + Math.abs(d))
 }
 
 // Counter 类的用例，模拟T次掷骰子
 export function Rolls(times: number) {
     const SIDES: number = 6,
-        rolls: Counter[] = [];
+        rolls: Counter[] = []
     for (let i: number = 0; i < SIDES; i++) {
-        rolls.push(new Counter(i + '\'s'));
+        rolls.push(new Counter(i + '\'s'))
     }
     for (let t: number = 0; t < times; t++) {
-        rolls[Math.floor(Math.random() * 6)].increment();
+        rolls[Math.floor(Math.random() * 6)].increment()
     }
     for (let n: number = 0; n < SIDES; n++) {
-        console.log(rolls[n].toString());
+        console.log(rolls[n].toString())
     }
 }

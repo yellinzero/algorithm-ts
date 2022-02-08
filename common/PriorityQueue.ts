@@ -1,4 +1,4 @@
-import { getType, isComparable, Comparable } from "./index";
+import { getType, isComparable, Comparable } from "./index"
 // 排序抽象类
 export abstract class PQ<T> {
     constructor(arg?: T[] | number)
@@ -24,29 +24,29 @@ export abstract class AbstractMinPQ<T> extends PQ<T> {
  *以下为基于堆的优先队列
  */
 export class MaxPQ<T> extends AbstractMaxPQ<T> {
-    private pq: any[];
-    private N: number = 0;
+    private pq: any[]
+    private N: number = 0
 
     constructor(maxN: number) {
-        super();
-        this.pq = new Array(maxN + 1);
+        super()
+        this.pq = new Array(maxN + 1)
     }
 
     public isEmpty(): boolean {
-        return this.N === 0;
+        return this.N === 0
     }
     public size(): number {
-        return this.N;
+        return this.N
     }
 
     // 插入数据，从最尾端上浮
     public insert(v: T): void {
-        this.pq[++this.N] = v;
-        this.swim(this.N);
+        this.pq[++this.N] = v
+        this.swim(this.N)
     }
 
     public max(): T {
-        return this.pq[1];
+        return this.pq[1]
     }
 
     /** 
@@ -54,29 +54,29 @@ export class MaxPQ<T> extends AbstractMaxPQ<T> {
      * 将最大元素输出后置于数组最后清除，将最后元素置于堆最上放进行下沉重新排序
      */
     public delMax(): T {
-        const max = this.pq[1];
-        this.exch(1, this.N--);
-        this.pq[this.N + 1] = null;
-        this.sink(1);
-        return max;
+        const max = this.pq[1]
+        this.exch(1, this.N--)
+        this.pq[this.N + 1] = null
+        this.sink(1)
+        return max
     }
 
     private less(i: number, j: number): boolean {
         if (isComparable(this.pq[i]) && isComparable(this.pq[j])) {
-            return (this.pq[i] as unknown as Comparable).compareTo(this.pq[j] as unknown as Comparable) < 0;
+            return (this.pq[i] as unknown as Comparable).compareTo(this.pq[j] as unknown as Comparable) < 0
         } else if ((getType(this.pq[i]) === 'String' && getType(this.pq[j]) === 'String')
             || (getType(this.pq[i]) === 'Number' && getType(this.pq[j]) === 'Number')) {
-            return this.pq[i] < this.pq[j];
+            return this.pq[i] < this.pq[j]
         } else {
-            console.error('请传入Comparable、Number、String类型，且保证传入值类型相同');
-            return false;
+            console.error('请传入Comparable、Number、String类型，且保证传入值类型相同')
+            return false
         }
     }
 
     private exch(i: number, j: number): void {
-        const t: T = this.pq[i];
-        this.pq[i] = this.pq[j];
-        this.pq[j] = t;
+        const t: T = this.pq[i]
+        this.pq[i] = this.pq[j]
+        this.pq[j] = t
     }
 
     /** 
@@ -84,8 +84,8 @@ export class MaxPQ<T> extends AbstractMaxPQ<T> {
      */
     private swim(k: number): void {
         while (k > 1 && this.less(Math.floor(k / 2), k)) {
-            this.exch(Math.floor(k / 2), k);
-            k = Math.floor(k / 2);
+            this.exch(Math.floor(k / 2), k)
+            k = Math.floor(k / 2)
         }
     }
 
@@ -97,75 +97,75 @@ export class MaxPQ<T> extends AbstractMaxPQ<T> {
      */
     private sink(k: number): void {
         while (2 * k <= this.N) {
-            let j: number = 2 * k;
-            if (j < this.N && this.less(j, j + 1)) j++;
-            if (!this.less(k, j)) break;
-            this.exch(k, j);
-            k = j;
+            let j: number = 2 * k
+            if (j < this.N && this.less(j, j + 1)) j++
+            if (!this.less(k, j)) break
+            this.exch(k, j)
+            k = j
         }
     }
 }
 
 export class IndexMinPQ<T> extends AbstractMinPQ<T> {
-    private items: any[];
-    private qp: number[];
-    private pq: number[];
-    private N: number = 0;
+    private items: any[]
+    private qp: number[]
+    private pq: number[]
+    private N: number = 0
 
     constructor(maxN: number) {
-        super();
-        this.pq = new Array(maxN + 1);
-        this.items = new Array(maxN + 1);
-        this.qp = new Array(maxN + 1);
+        super()
+        this.pq = new Array(maxN + 1)
+        this.items = new Array(maxN + 1)
+        this.qp = new Array(maxN + 1)
         for (let i = 0; i <= maxN; i++) {
             this.qp[i] = -1
         }
     }
 
     public isEmpty(): boolean {
-        return this.N === 0;
+        return this.N === 0
     }
     public size(): number {
-        return this.N;
+        return this.N
     }
 
     // 插入数据，从最尾端上浮
     public insert(item: T, k: number): void {
-        this.N++;
-        this.qp[k] = this.N;
-        this.pq[this.N] = k;
-        this.items[k] = item;
-        this.swim(this.N);
+        this.N++
+        this.qp[k] = this.N
+        this.pq[this.N] = k
+        this.items[k] = item
+        this.swim(this.N)
     }
 
     // 修改索引为k的元素为item
     public change(item: T, k: number): void {
-        this.items[k] = item;
-        this.swim(this.qp[k]);
-        this.sink(this.qp[k]);
+        this.items[k] = item
+        this.swim(this.qp[k])
+        this.sink(this.qp[k])
     }
 
     // 是否存在索引为k的元素
     public contains(k: number): boolean {
-        return this.qp[k] != -1;
+        return this.qp[k] != -1
     }
 
     // 删除索引为k的元素
     public delete(k: number): void {
-        const index = this.qp[k];
-        this.exch(index, this.N--);
+        const index = this.qp[k]
+        this.exch(index, this.N--)
         this.swim(index)
         this.sink(index)
-        this.items[k] = null;
-        this.qp[k] = -1;
+        this.items[k] = null
+        this.qp[k] = -1
     }
 
     public min(): T {
-        return this.items[this.pq[1]];
+        return this.items[this.pq[1]]
     }
 
     public minIndex(): number {
-        return this.pq[1];
+        return this.pq[1]
     }
 
     /** 
@@ -173,12 +173,12 @@ export class IndexMinPQ<T> extends AbstractMinPQ<T> {
      * 将最小元素输出后置于数组最后清除，将最后元素置于堆最上放进行下沉重新排序
      */
     public delMin(): number {
-        const min = this.pq[1];
-        this.exch(1, this.N--);
-        this.sink(1);
-        this.qp[this.pq[this.N + 1]] = -1;
-        this.items[this.pq[this.N + 1]] = null;
-        return min;
+        const min = this.pq[1]
+        this.exch(1, this.N--)
+        this.sink(1)
+        this.qp[this.pq[this.N + 1]] = -1
+        this.items[this.pq[this.N + 1]] = null
+        return min
     }
 
     /** 
@@ -186,22 +186,22 @@ export class IndexMinPQ<T> extends AbstractMinPQ<T> {
      */
     private less(i: number, j: number): boolean {
         if (isComparable(this.items[this.pq[i]]) && isComparable(this.items[this.pq[j]])) {
-            return (this.items[this.pq[i]] as unknown as Comparable).compareTo(this.items[this.pq[j]] as unknown as Comparable) > 0;
+            return (this.items[this.pq[i]] as unknown as Comparable).compareTo(this.items[this.pq[j]] as unknown as Comparable) > 0
         } else if ((getType(this.items[this.pq[i]]) === 'String' && getType(this.items[this.pq[j]]) === 'String')
             || (getType(this.items[this.pq[i]]) === 'Number' && getType(this.items[this.pq[j]]) === 'Number')) {
-            return this.items[this.pq[i]] > this.items[this.pq[j]];
+            return this.items[this.pq[i]] > this.items[this.pq[j]]
         } else {
-            console.error('请传入Comparable、Number、String类型，且保证传入值类型相同');
-            return false;
+            console.error('请传入Comparable、Number、String类型，且保证传入值类型相同')
+            return false
         }
     }
 
     private exch(i: number, j: number): void {
-        const key: number = this.pq[i];
-        this.pq[i] = this.pq[j];
-        this.pq[j] = key;
-        this.qp[this.pq[i]] = i;
-        this.qp[this.pq[j]] = j;
+        const key: number = this.pq[i]
+        this.pq[i] = this.pq[j]
+        this.pq[j] = key
+        this.qp[this.pq[i]] = i
+        this.qp[this.pq[j]] = j
     }
 
     /** 
@@ -209,8 +209,8 @@ export class IndexMinPQ<T> extends AbstractMinPQ<T> {
      */
     private swim(n: number): void {
         while (n > 1 && this.less(Math.floor(n / 2), n)) {
-            this.exch(Math.floor(n / 2), n);
-            n = Math.floor(n / 2);
+            this.exch(Math.floor(n / 2), n)
+            n = Math.floor(n / 2)
         }
     }
 
@@ -222,11 +222,11 @@ export class IndexMinPQ<T> extends AbstractMinPQ<T> {
      */
     private sink(k: number): void {
         while (2 * k <= this.N) {
-            let j: number = 2 * k;
-            if (j < this.N && this.less(j, j + 1)) j++;
-            if (!this.less(k, j)) break;
-            this.exch(k, j);
-            k = j;
+            let j: number = 2 * k
+            if (j < this.N && this.less(j, j + 1)) j++
+            if (!this.less(k, j)) break
+            this.exch(k, j)
+            k = j
         }
     }
 }

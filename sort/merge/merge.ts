@@ -1,16 +1,16 @@
-import { Sort } from "../../common";
+import { Sort } from "../../common"
 class MergeFn extends Sort {
     static aux: any[]
     static merge(a: any, lo: number, mid: number, hi: number) {
-        let i = lo, j = mid + 1;
+        let i = lo, j = mid + 1
         for (let k = lo; k <= hi; k++) {
             this.aux[k] = a[k]
         }
         for (let k = lo; k <= hi; k++) {
-            if (i > mid) a[k] = this.aux[j++];
-            else if (j > hi) a[k] = this.aux[i++];
-            else if (this.less(this.aux[j], this.aux[i])) a[k] = this.aux[j++];
-            else a[k] = this.aux[i++];
+            if (i > mid) a[k] = this.aux[j++]
+            else if (j > hi) a[k] = this.aux[i++]
+            else if (this.less(this.aux[j], this.aux[i])) a[k] = this.aux[j++]
+            else a[k] = this.aux[i++]
         }
     }
 }
@@ -23,11 +23,11 @@ export class Merge extends MergeFn {
             this.aux = new Array(a.length)
             this.sort(a, 0, a.length - 1)
         } else if (typeof lo === 'number' && typeof hi === 'number') {
-            if (hi <= lo) return;
-            let mid: number = lo + Math.floor((hi - lo) / 2);
-            this.sort(a, lo, mid);
-            this.sort(a, mid + 1, hi);
-            this.merge(a, lo, mid, hi);
+            if (hi <= lo) return
+            let mid: number = lo + Math.floor((hi - lo) / 2)
+            this.sort(a, lo, mid)
+            this.sort(a, mid + 1, hi)
+            this.merge(a, lo, mid, hi)
         } else {
             console.error('参数错误')
         }
@@ -38,7 +38,7 @@ export class Merge extends MergeFn {
 export class MergeBU extends MergeFn {
     static aux: any[]
     static sort(a: any[]): void {
-        const N = a.length;
+        const N = a.length
         this.aux = new Array(N)
         for (let sz = 1; sz < N; sz = sz + sz) {
             for (let lo = 0; lo < N - sz; lo += sz + sz) {
