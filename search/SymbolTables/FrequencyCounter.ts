@@ -4,11 +4,12 @@ const fs = require('fs')
 const argvs = process.argv.splice(2)
 const minlen: number = Number(argvs[0])
 const article = fs.readFileSync(argvs[1], { encoding: 'UTF-8' })
+// TODO 文章取词逻辑存在问题，需要排除掉符号的影响
 const articleArr = article.split(' ')
 
 const ssst = new SequentialSearchST<any, number>()
 while (articleArr.length > 0) {
-    const word: string = articleArr.shift()
+    let word: string = articleArr.shift()
     if (word.length < minlen) continue;
     if (!ssst.contains(word)) ssst.put(word, 1);
     else ssst.put(word, ssst.get(word)! + 1);
