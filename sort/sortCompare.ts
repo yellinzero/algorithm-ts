@@ -1,5 +1,5 @@
 #!/usr/bin/env ts-node
-// todo: 内存消耗计算
+// TODO: 内存消耗计算
 const argvs = process.argv.splice(2)
 import * as Sort from "./index"
 class SortCompare {

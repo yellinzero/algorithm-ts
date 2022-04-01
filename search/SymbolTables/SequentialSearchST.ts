@@ -16,7 +16,8 @@ type NodeType<Key, Value> = Node<Key, Value> | null
  * 基于无序单向链表实现
  */
 export class SequentialSearchST<Key, Value> {
-    private first:  NodeType<Key, Value> = null
+    private first: NodeType<Key, Value> = null
+    putTimes = 0
 
     get(key: Key): Value | null {
         for (let x: NodeType<Key, Value> = this.first; x !== null; x = x.next) {
@@ -27,9 +28,10 @@ export class SequentialSearchST<Key, Value> {
 
     put(key: Key, val: Value): void {
         for (let x: NodeType<Key, Value> = this.first; x !== null; x = x.next) {
-            if (key === x.key) { 
-                x.val = val; 
-                return; 
+            this.putTimes++
+            if (key === x.key) {
+                x.val = val;
+                return;
             }
         }
         this.first = new Node(key, val, this.first);
