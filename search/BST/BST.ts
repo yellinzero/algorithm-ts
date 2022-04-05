@@ -1,5 +1,4 @@
-//  TODO
-import {getComparaValue } from '../../common/'
+import { getComparaValue } from '../../common/'
 class BstNode<Key, Value>{
     key: Key
     val: Value
@@ -22,62 +21,146 @@ type NodeType<Key, Value> = BstNode<Key, Value> | null
  */
 export class BST<Key, Value> {
     private root: NodeType<Key, Value> = null
+    private putTimes: number = 0
 
-    get(key: Key, node?: NodeType<Key, Value>): Value {
+    get(key: Key, node?: NodeType<Key, Value>): Value | null {
         if (node === undefined) {
             return this.get(key, this.root)
         }
         if (node === null) return null;
 
-        const cmp: number = getComparaValue(key, node.key)
+        const cmp: number | undefined = getComparaValue(key, node.key)
 
-        if (cmp < 0) return this.get(key, node.left)
-        else if (cmp > 0) return this.get(key, node.right)
+        if (cmp! < 0) return this.get(key, node.left)
+        else if (cmp! > 0) return this.get(key, node.right)
         else return node.val
 
     }
 
     put(key: Key, val: Value): void
     put(key: Key, val: Value, node?: NodeType<Key, Value>): NodeType<Key, Value>
-    put(key, val, node?): any {
+    put(key: any, val: any, node?: any): any {
         if (node === undefined) {
             this.root = this.put(key, val, this.root)
         } else {
             if (node === null) return new BstNode(key, val, 1)
-            const cmp = getComparaValue(key, node.key)
-            if (cmp < 0) node.left = this.put(key, val, node.left)
-            else if (cmp > 0) node.right = this.put(key, val, node.right)
+            this.putTimes++
+            const cmp: number | undefined = getComparaValue(key, node.key)
+            if (cmp! < 0) node.left = this.put(key, val, node.left)
+            else if (cmp! > 0) node.right = this.put(key, val, node.right)
             else node.val = val
             node.N = this.size(node.left) + this.size(node.right) + 1
             return node
         }
     }
-    max() {
 
+    max(node?: NodeType<Key, Value>): NodeType<Key, Value> | Key {
+        if (node === undefined) {
+            return (this.max(this.root) as NodeType<Key, Value>)!.key
+        }
+        if (node?.right === null) return node
+        return this.max(node?.right)
     }
-    min() {
 
+    min(node?: NodeType<Key, Value>): NodeType<Key, Value> | Key {
+        if (node === undefined) {
+            return (this.min(this.root) as NodeType<Key, Value>)!.key
+        }
+        if (node?.left === null) return node
+        return this.min(node?.left)
     }
-    floor() {
 
+    floor(key: Key, node?: NodeType<Key, Value>): NodeType<Key, Value> | Key {
+        if (node === undefined) {
+            const node: NodeType<Key, Value> = this.floor(key, this.root) as NodeType<Key, Value>
+            if (node === null) return null
+            return node.key
+        }
+        if (node === null) return null
+        const cmp = getComparaValue(key, node.key)
+        if (cmp! === 0) return node
+        if (cmp! < 0) return this.floor(key, node.left)
+        const t: NodeType<Key, Value> = this.floor(key, node.right) as NodeType<Key, Value>
+        if (t !== null) return t
+        else return node
     }
-    ceiling() {
 
+    ceiling(key: Key, node?: NodeType<Key, Value>): NodeType<Key, Value> | Key {
+        if (node === undefined) {
+            const node: NodeType<Key, Value> = this.ceiling(key, this.root) as NodeType<Key, Value>
+            if (node === null) return null
+            return node.key
+        }
+        if (node === null) return null
+        const cmp = getComparaValue(key, node.key)
+        if (cmp! === 0) return node
+        if (cmp! > 0) return this.ceiling(key, node.right)
+        const t: NodeType<Key, Value> = this.ceiling(key, node.left) as NodeType<Key, Value>
+        if (t !== null) return t
+        else return node
     }
-    select() {
 
+    select(k: number, node?: NodeType<Key, Value>): NodeType<Key, Value> | Key {
+        if (node === undefined) {
+            return (this.select(k, this.root) as NodeType<Key, Value>)!.key
+        }
+        if (node === null) return null
+        const t: number = this.size(node.left)
+        if (t > k) return this.select(k, node.left)
+        else if (t < k) return this.select(k - t - 1, node.right)
+        else return node
     }
-    rank() {
 
+    rank(key: Key, node?: NodeType<Key, Value>): number {
+        if (node === undefined) {
+            return this.rank(key, this.root)
+        }
+        if (node === null) return 0
+        const cmp = getComparaValue(key, node.left)
+        if (cmp! < 0) return this.rank(key, node.left)
+        else if (cmp! > 0) return 1 + this.size(node.left) + this.rank(key, node.right)
+        else return this.size(node.left)
     }
-    delete() {
 
+    delete(key: Key, node?: NodeType<Key, Value>): NodeType<Key, Value> | undefined {
+        if (node === undefined) {
+            this.root = this.delete(key, this.root)!
+        } else {
+            if (node === null) return null;
+            const cmp = getComparaValue(key, node.key)!
+            if (cmp < 0) node.left = this.delete(key, node.left)!
+            else if (cmp > 0) node.right = this.delete(key, node.right)!
+            else {
+                if (node.right === null) return node.left
+                if (node.left === null) return node.right
+                const t: NodeType<Key, Value> = node;
+                node = this.min(t.right) as NodeType<Key, Value>
+                node!.right = this.deleteMin(t.right)!
+                node!.left = t.left
+            }
+            node!.N = this.size(node!.left) + this.size(node!.right) + 1
+            return node
+        }
     }
-    deleteMin() {
 
+    deleteMin(node?: NodeType<Key, Value>): NodeType<Key, Value> | undefined {
+        if (node === undefined) {
+            this.root = this.deleteMin(this.root)!
+        } else {
+            if (node!.left === null) return node!.right
+            node!.left = this.deleteMin(node!.left)!
+            node!.N = this.size(node!.left) + this.size(node!.right) + 1
+        }
     }
-    deleteMax() {
 
+    deleteMax(node?: NodeType<Key, Value>): NodeType<Key, Value> | undefined {
+        if (node === undefined) {
+            this.root = this.deleteMax(this.root)!
+        } else {
+            if (node!.right === null) return node!.left
+            node!.right = this.deleteMax(node!.right)!
+            node!.N = this.size(node!.left) + this.size(node!.right) + 1
+        }
     }
 
     size(x?: NodeType<Key, Value>): number {
@@ -91,10 +174,30 @@ export class BST<Key, Value> {
         }
     }
 
-    // * keys() {
-    //     for (let x: NodeType<Key, Value> = this.first; x !== null; x = x.next) {
-    //         yield x.key
-    //     }
-    // }
+    contains(key: Key) {
+        return !!this.get(key)
+    }
+
+
+    getAver() {
+        return this.putTimes / this.root!.N
+    }
+
+    keys(lo?: Key, hi?: Key, node?: NodeType<Key, Value>, queue?: Key[]): Key[] | undefined {
+        if (lo === undefined && hi === undefined && node === undefined && queue === undefined) {
+            return this.keys(this.min() as Key, this.max() as Key)
+        }
+        if (node === undefined && queue === undefined) {
+            const queue: Key[] = []
+            this.keys(lo, hi, this.root, queue)
+            return queue
+        }
+        if (node === null) return
+        const cmplo = getComparaValue(lo, node!.key)!
+        const cmphi = getComparaValue(hi, node!.key)!
+        if (cmplo < 0) this.keys(lo, hi, node?.left, queue)
+        if (cmplo <= 0 && cmphi >= 0) queue?.push(node!.key)
+        if (cmphi > 0) this.keys(lo, hi, node?.right, queue)
+    }
 
 }

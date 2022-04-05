@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@types/node": "^16.11.7"
+    "@types/node": "^16.11.7",
+    "single-line-log": "^1.1.2"
   }
 }
