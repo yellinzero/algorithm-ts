@@ -8,10 +8,11 @@ export class BinarySearchST<Key, Value> {
     private keys: Key[]
     private vals: Value[]
     private N: number = 0
-    putTimes: number = 0
-    constructor(capacity: number) {
-        this.keys = new Array(capacity) as Key[]
-        this.vals = new Array(capacity) as Value[]
+    private putTimes: number = 0
+    constructor() {
+        // TS数组是动态的
+        this.keys =[] as Key[]
+        this.vals = [] as Value[]
     }
 
     size(): number {
@@ -24,10 +25,12 @@ export class BinarySearchST<Key, Value> {
 
     get(key: Key) {
         if (this.isEmpty()) return null
-        const i = this.rank(key) as number
-        const cmp = i < this.N && getComparaValue(this.keys[i], key)
-        if (cmp === 0) return this.vals[i]
-        else return null
+        const i = this.rank(key)
+        if (i !== undefined) {
+            const cmp = i < this.N && getComparaValue(this.keys[i], key)
+            if (cmp === 0) return this.vals[i]
+            else return null
+        }
     }
 
     contains(key: Key) {
@@ -35,21 +38,23 @@ export class BinarySearchST<Key, Value> {
     }
 
     put(key: Key, val: Value) {
-        const i = this.rank(key) as number
-        this.putTimes++
-        const cmp = i < this.N && getComparaValue(this.keys[i], key)
-        if (cmp === 0) {
-            this.vals[i] = val
-            return
+        const i = this.rank(key)
+        if (i !== undefined) {
+            this.putTimes++
+            const cmp = i < this.N && getComparaValue(this.keys[i], key)
+            if (cmp === 0) {
+                this.vals[i] = val
+                return
+            }
+            // 后移一位
+            for (let j = this.N; j > i; j--) {
+                this.keys[j] = this.keys[j - 1]
+                this.vals[j] = this.vals[j - 1]
+            }
+            this.keys[i] = key;
+            this.vals[i] = val;
+            this.N++
         }
-        // 后移一位
-        for (let j = this.N; j > i; j--) {
-            this.keys[j] = this.keys[j - 1]
-            this.vals[j] = this.vals[j - 1]
-        }
-        this.keys[i] = key;
-        this.vals[i] = val;
-        this.N++
     }
 
     rank(key: Key, lo?: number, hi?: number): number | undefined {
@@ -67,7 +72,6 @@ export class BinarySearchST<Key, Value> {
                 else return mid
             }
         }
-
     }
 
     // 非递归的二分查找法
@@ -98,9 +102,11 @@ export class BinarySearchST<Key, Value> {
         return this.keys[k]
     }
 
-    ceiling(key: Key): Key {
-        const i = this.rank(key) as number
-        return this.keys[i]
+    ceiling(key: Key): Key | undefined {
+        const i = this.rank(key)
+        if (i !== undefined) {
+            return this.keys[i]
+        }
     }
 
     delete(key: Key) {
@@ -109,21 +115,28 @@ export class BinarySearchST<Key, Value> {
 
     range(lo: Key, hi: Key): Key[] {
         const q: Key[] = []
-        const loi = this.rank(lo) as number
-        const hii = this.rank(hi) as number
-        for (let i = loi; i < hii; i++) {
-            q.push(this.keys[i])
+        const loi = this.rank(lo)
+        const hii = this.rank(hi)
+        if (loi !== undefined && hii !== undefined) {
+            for (let i = loi; i < hii; i++) {
+                q.push(this.keys[i])
+            }
+            if (this.contains(hi)) {
+                q.push(this.keys[hii])
+            }
+            return q
         }
-        if (this.contains(hi)) {
-            q.push(this.keys[hii])
-        }
-        return q
+        return []
     }
 
     * keysEach() {
         for (let i = 0; i < this.N; i++) {
             yield this.keys[i]
         }
+    }
+
+    getAver() {
+        return this.putTimes / this.N
     }
 
 }

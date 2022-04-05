@@ -17,7 +17,8 @@ type NodeType<Key, Value> = Node<Key, Value> | null
  */
 export class SequentialSearchST<Key, Value> {
     private first: NodeType<Key, Value> = null
-    putTimes = 0
+    private putTimes = 0
+    private N = 0
 
     get(key: Key): Value | null {
         for (let x: NodeType<Key, Value> = this.first; x !== null; x = x.next) {
@@ -35,6 +36,7 @@ export class SequentialSearchST<Key, Value> {
             }
         }
         this.first = new Node(key, val, this.first);
+        this.N++
     }
 
     * keys() {
@@ -45,5 +47,9 @@ export class SequentialSearchST<Key, Value> {
 
     contains(key: Key): boolean {
         return this.get(key) !== null;
+    }
+
+    getAver() {
+        return this.putTimes / this.N
     }
 }
