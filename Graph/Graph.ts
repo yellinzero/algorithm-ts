@@ -31,7 +31,28 @@ export class Graph {
         this.E++
     }
 
-    getAdj(v: number) {
+    getAdj(v: number): number[] {
         return this.adj[v]
+    }
+
+    getV(): number {
+        return this.V
+    }
+
+    getE(): number {
+        return this.E
+    }
+
+    // 图的字符串表示
+    toString() {
+        let s = `${this.V} vertices, ${this.E} edges\n`
+        for (let v = 0; v < this.V; v++) {
+            s += v + ": "
+            for (let w = 0; w < this.adj[v].length; w++) {
+                s += this.adj[v][w] + " "
+            }
+            s += "\n"
+        }
+        return s
     }
 }

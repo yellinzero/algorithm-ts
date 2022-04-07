@@ -18,6 +18,8 @@ export function shuffle(a: any[]): void {
 
 // 文档相关方法
 export * from './article'
+// 图相关方法
+export * from './graph'
 // 工具类
 // 比较类
 export * from "./Comparable"
