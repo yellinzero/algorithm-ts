@@ -1,4 +1,4 @@
-import { getComparaValue } from '../../common/'
+import { getComparaValue } from '../../utils'
 class BstNode<Key, Value>{
     key: Key
     val: Value

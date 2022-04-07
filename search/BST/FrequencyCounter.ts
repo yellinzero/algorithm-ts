@@ -1,7 +1,7 @@
 #!/usr/bin/env ts-node
-import { getWords } from "../../common/article"
-import { ProgressBar } from "../../utils/progress"
+import { getWords, ProgressBar } from "../../utils"
 import { BST } from "./BST"
+
 const argvs = process.argv.splice(2)
 const minlen: number = Number(argvs[0])
 const articleArr = getWords(argvs[1])

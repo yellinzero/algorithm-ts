@@ -1,5 +1,4 @@
-import { isComparable, Comparable } from "./Comparable"
-import { getType } from "./utils"
+import { isComparable, getType } from "../utils"
 // 排序抽象类
 export abstract class Sort {
     static sort(a: any[]): void { }

@@ -1,4 +1,4 @@
-import { Sort } from "../../common"
+import { Sort } from "../Sort"
 
 // 核心：插入排序分成多个子数组进行排序(h有序数组)（由大及小，当h为1时，则数组排序完成）
 export class Shell extends Sort {

@@ -1,4 +1,4 @@
-import { getComparaValue } from '../../common'
+import { getComparaValue } from '../../utils'
 const RED = true
 const BLACK = false
 class RedBlackBstNode<Key, Value>{
@@ -37,7 +37,7 @@ export class RedBlackBST<Key, Value> {
     }
 
     // 左旋转（将右红转变为左红）
-    rotateLeft(h: NodeType<Key, Value>):  NodeType<Key, Value> {
+    rotateLeft(h: NodeType<Key, Value>): NodeType<Key, Value> {
         const x = h?.right
         h!.right = x?.left!
         x!.left = h
@@ -49,7 +49,7 @@ export class RedBlackBST<Key, Value> {
     }
 
     // 右旋转（将左红转变为右红）
-    rotateRight(h: NodeType<Key, Value>):  NodeType<Key, Value> {
+    rotateRight(h: NodeType<Key, Value>): NodeType<Key, Value> {
         const x = h?.left
         h!.left = x?.right!
         x!.right = h
@@ -97,9 +97,9 @@ export class RedBlackBST<Key, Value> {
             if (cmp < 0) node.left = this.put(key, val, node.left)
             else if (cmp > 0) node.right = this.put(key, val, node.right)
             else node.val = val
-            if(this.isRed(node.right) && !this.isRed(node.left)) node = this.rotateLeft(node)
-            if(this.isRed(node.left) && this.isRed(node.left.left)) node = this.rotateRight(node)
-            if(this.isRed(node.left) && this.isRed(node.right)) this.flipColors(node)
+            if (this.isRed(node.right) && !this.isRed(node.left)) node = this.rotateLeft(node)
+            if (this.isRed(node.left) && this.isRed(node.left.left)) node = this.rotateRight(node)
+            if (this.isRed(node.left) && this.isRed(node.right)) this.flipColors(node)
             node.N = this.size(node.left) + this.size(node.right) + 1
             return node
         }

@@ -1,4 +1,5 @@
-import { Sort, shuffle, Comparable } from "../../common"
+import { shuffle, Comparable } from "../../utils"
+import {Sort} from "../Sort"
 
 // 核心：大的右边，小的左边，切分元素在中间，反复长度递减切分，只要每一个元素左小右大则整个数组有序
 export class Quick extends Sort {

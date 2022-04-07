@@ -1,4 +1,4 @@
-import { getType, isComparable, Comparable } from "./index"
+import { getType, isComparable, Comparable } from "../../utils"
 // 排序抽象类
 export abstract class PQ<T> {
     constructor(arg?: T[] | number)

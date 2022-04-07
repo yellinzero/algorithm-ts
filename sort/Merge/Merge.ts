@@ -1,4 +1,4 @@
-import { Sort } from "../../common"
+import { Sort } from "../Sort"
 class MergeFn extends Sort {
     static aux: any[]
     static merge(a: any, lo: number, mid: number, hi: number) {

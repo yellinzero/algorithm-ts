@@ -1,4 +1,4 @@
-import { isComparable, Comparable, getType } from '../../common/index'
+import { isComparable, Comparable, getType } from '../../utils'
 /**
  *核心：利用堆优先队列实现排序
  */

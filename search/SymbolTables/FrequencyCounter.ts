@@ -1,8 +1,7 @@
 #!/usr/bin/env ts-node
-import { getWords } from "../../common/article"
+import { getWords, ProgressBar } from "../../utils"
 import { SequentialSearchST } from "./SequentialSearchST"
 import { BinarySearchST } from "./BinarySearchST"
-import { ProgressBar } from "../../utils/progress"
 const argvs = process.argv.splice(2)
 const minlen: number = Number(argvs[0])
 const articleArr = getWords(argvs[1])

@@ -1,6 +1,6 @@
 #!/usr/bin/env ts-node
 import { Quick, Quick3way } from './Quick'
-import { Comparable } from "../../common"
+import { Comparable } from "../../utils"
 const argvs = process.argv.splice(2)
 // examples
 const arr = [1, 2, 5, 6, 7, 7, 8, 123, 5, 2]

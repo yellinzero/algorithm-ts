@@ -1,4 +1,4 @@
-import { Sort } from "../../common"
+import { Sort } from "../Sort"
 
 // 核心：将当前值按大小插入到数组对应位置
 export class Insertion extends Sort {

@@ -1,4 +1,4 @@
-import { getComparaValue } from "../../common"
+import { getComparaValue } from "../../utils"
 
 /* 
  * 二分查找
