@@ -26,8 +26,8 @@ export class Graph {
     }
 
     addEdge(v: number, w: number) {
-        this.adj[v].push(w)
-        this.adj[w].push(v)
+        this.adj[v].unshift(w)
+        this.adj[w].unshift(v)
         this.E++
     }
 
