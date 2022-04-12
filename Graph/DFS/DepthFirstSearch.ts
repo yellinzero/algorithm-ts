@@ -1,7 +1,6 @@
 import { Graph } from "../Graph";
-import { Search } from "../Search";
 
-export class DepthFirstSearch implements Search {
+export class DepthFirstSearch {
     private markeds: boolean[] = []
     private N: number = 0
 
