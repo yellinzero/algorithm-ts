@@ -1,5 +1,5 @@
-import { Graph } from "./Graph";
-import { Search } from "./Search";
+import { Graph } from "../Graph";
+import { Search } from "../Search";
 
 export class DepthFirstSearch implements Search {
     private markeds: boolean[] = []
