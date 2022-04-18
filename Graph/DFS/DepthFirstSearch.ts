@@ -1,4 +1,4 @@
-import { Graph } from "../Graph";
+import { Graph } from "../Graph"
 
 export class DepthFirstSearch {
     private markeds: boolean[] = []
@@ -12,9 +12,8 @@ export class DepthFirstSearch {
     dfs(G: Graph, v: number) {
         this.markeds[v] = true;
         this.N++
-        const adj = G.getAdj(v)
-        for (let w = 0; w < adj.length; w++) {
-            if (!this.markeds[adj[w]]) this.dfs(G, adj[w])
+        for (let w of G.getAdj(v)) {
+            if (!this.markeds[w]) this.dfs(G, w)
         }
     }
 

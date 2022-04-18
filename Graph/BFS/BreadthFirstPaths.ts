@@ -1,6 +1,6 @@
 import { Graph } from "../Graph"
 
-export class DepthFirstPaths {
+export class BreadthFirstPaths {
     private marked: boolean[] = []
     private edgeTo: number[]
     private s: number
@@ -9,15 +9,21 @@ export class DepthFirstPaths {
         this.marked = []
         this.edgeTo = []
         this.s = s
-        this.dfs(G, s)
+        this.bfs(G, s)
     }
 
-    dfs(G: Graph, v: number) {
-        this.marked[v] = true;
-        for (let w of G.getAdj(v)) {
-            if (!this.marked[w]) {
-                this.edgeTo[w] = v
-                this.dfs(G, w)
+    bfs(G: Graph, s: number) {
+        const queue: number[] = []
+        this.marked[s] = true;
+        queue.push(s)
+        while (queue.length > 0) {
+            const v = queue.shift() as number
+            for (let w of G.getAdj(v)) {
+                if (!this.marked[w]) {
+                    this.edgeTo[w] = v
+                    this.marked[w] = true
+                    queue.push(w)
+                }
             }
         }
     }
