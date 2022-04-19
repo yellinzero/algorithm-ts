@@ -19,9 +19,8 @@ export function avgDegree(G: Graph): number {
 export function numberOfSelfLoops(G: Graph): number {
     let count = 0
     for (let v = 0; v < G.getV(); v++) {
-        const adj = G.getAdj(v)
-        for (let w = 0; w < adj.length; w++) {
-            if (v === adj[w]) count++
+        for (let w of G.getAdj(v)) {
+            if (v === w) count++
         }
     }
     return count / 2
