@@ -1,4 +1,7 @@
-import { Graph } from "../Graph"
+/**
+ * 无向图中的环检测
+ */
+import { Graph } from "../common/Graph"
 
 export class Cycle {
     private marked: boolean[]

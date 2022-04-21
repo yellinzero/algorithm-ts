@@ -3,7 +3,7 @@ export interface Comparable {
     compareTo(x: Comparable): number
 }
 
-export function isComparable(object: Comparable | unknown): object is Comparable {
+export function isComparable(object: any): object is Comparable {
     return (<Comparable>object)?.compareTo !== undefined
 }
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env ts-node
 
-import { Graph } from "./Graph";
+import { Graph } from "./common/Graph";
 import { CC } from "./DFS/CC";
 import { stdout } from "process";
 

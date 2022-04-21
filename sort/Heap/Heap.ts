@@ -25,7 +25,7 @@ function sink(a: any[], k: number, N: number): void {
 function less(a: any[], i: number, j: number): boolean {
     --i, --j
     if (isComparable(a[i]) && isComparable(a[j])) {
-        return (a[i] as unknown as Comparable).compareTo(a[j] as unknown as Comparable) < 0
+        return a[i].compareTo(a[j]) < 0
     } else if ((getType(a[i]) === 'String' && getType(a[j]) === 'String')
         || (getType(a[i]) === 'Number' && getType(a[j]) === 'Number')) {
         return a[i] < a[j]

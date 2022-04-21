@@ -1,4 +1,7 @@
-import { Graph } from "../Graph"
+/**
+ * 无向图中的双色问题
+ */
+import { Graph } from "../common/Graph"
 
 export class TwoColor {
     private marked: boolean[]

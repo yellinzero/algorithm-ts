@@ -63,7 +63,7 @@ export class MaxPQ<T> extends AbstractMaxPQ<T> {
 
     private less(i: number, j: number): boolean {
         if (isComparable(this.pq[i]) && isComparable(this.pq[j])) {
-            return (this.pq[i] as unknown as Comparable).compareTo(this.pq[j] as unknown as Comparable) < 0
+            return this.pq[i].compareTo(this.pq[j]) < 0
         } else if ((getType(this.pq[i]) === 'String' && getType(this.pq[j]) === 'String')
             || (getType(this.pq[i]) === 'Number' && getType(this.pq[j]) === 'Number')) {
             return this.pq[i] < this.pq[j]
@@ -186,7 +186,7 @@ export class IndexMinPQ<T> extends AbstractMinPQ<T> {
      */
     private less(i: number, j: number): boolean {
         if (isComparable(this.items[this.pq[i]]) && isComparable(this.items[this.pq[j]])) {
-            return (this.items[this.pq[i]] as unknown as Comparable).compareTo(this.items[this.pq[j]] as unknown as Comparable) > 0
+            return this.items[this.pq[i]].compareTo(this.items[this.pq[j]]) > 0
         } else if ((getType(this.items[this.pq[i]]) === 'String' && getType(this.items[this.pq[j]]) === 'String')
             || (getType(this.items[this.pq[i]]) === 'Number' && getType(this.items[this.pq[j]]) === 'Number')) {
             return this.items[this.pq[i]] > this.items[this.pq[j]]

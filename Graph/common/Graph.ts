@@ -1,3 +1,6 @@
+/**
+ * 无向图 
+ */ 
 export class Graph {
     private V: number = 0
     private E: number = 0

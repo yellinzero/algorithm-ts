@@ -1,6 +1,6 @@
 #!/usr/bin/env ts-node
 
-import { Graph } from "./Graph";
+import { Graph } from "./common/Graph";
 import { Cycle } from "./DFS/Cycle";
 
 const argvs = process.argv.splice(2)

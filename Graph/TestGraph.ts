@@ -1,5 +1,5 @@
 #!/usr/bin/env ts-node
-import { Graph } from "./Graph";
+import { Graph } from "./common/Graph";
 
 const argvs = process.argv.splice(2)
 const fs = require('fs')

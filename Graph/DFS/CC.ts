@@ -1,4 +1,7 @@
-import { Graph } from "../Graph"
+/**
+ * 无向图中的连通分量
+ */
+import { Graph } from "../common/Graph"
 
 export class CC {
     private marked: boolean[]

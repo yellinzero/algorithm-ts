@@ -1,4 +1,4 @@
-import { Graph } from "../Graph/Graph";
+import { Graph } from "../Graph/common/Graph";
 
 export function degree(G: Graph, v: number): number {
     return G.getAdj(v)?.length

@@ -1,4 +1,4 @@
-import { Graph } from "../Graph"
+import { Graph } from "../common/Graph"
 
 export class BreadthFirstPaths {
     private marked: boolean[] = []
