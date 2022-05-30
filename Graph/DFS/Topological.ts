@@ -1,3 +1,6 @@
+/**
+ * 拓扑排序
+ *  */
 import { Digraph } from "../common/Digraph";
 import { DepthFirstOrder } from "./DepthFirstOrder";
 import { DirectedCycle } from "./DirectedCycle";

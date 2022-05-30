@@ -1,3 +1,6 @@
+/**
+ * 有向图的深度优先搜索
+ *  */
 import { getType } from "../../utils"
 import { Digraph } from "../common/Digraph"
 

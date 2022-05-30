@@ -1,3 +1,6 @@
+/**
+ * 无向图基于广度优先搜索查找路径
+ */
 import { Graph } from "../common/Graph"
 
 export class BreadthFirstPaths {

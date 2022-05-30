@@ -1,3 +1,6 @@
+/**
+ * 无向图的深度优先搜索
+ *  */
 import { Graph } from "../common/Graph"
 
 export class DepthFirstSearch {

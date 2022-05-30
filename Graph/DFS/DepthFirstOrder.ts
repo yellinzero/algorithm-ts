@@ -1,3 +1,6 @@
+/**
+ * 基于深度优先搜索的顶点排序（有向图）
+ *  */
 import { Digraph } from "../common/Digraph";
 
 export class DepthFirstOrder {
