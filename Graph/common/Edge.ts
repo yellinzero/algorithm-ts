@@ -31,7 +31,7 @@ export class Edge implements Comparable<Edge> {
 
     compareTo(that: Edge): number {
         if (this.getWeight() < that.getWeight()) return -1
-        else if (this.getWeight() < that.getWeight()) return 1
+        else if (this.getWeight() > that.getWeight()) return 1
         else return 0
     }
 

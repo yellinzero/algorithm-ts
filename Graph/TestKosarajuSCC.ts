@@ -2,7 +2,6 @@
 
 import { Digraph } from "./common/Digraph";
 import { KosarajuSCC } from "./DFS/KosarajuSCC";
-import { stdout } from "process";
 
 const argvs = process.argv.splice(2)
 const fs = require('fs')

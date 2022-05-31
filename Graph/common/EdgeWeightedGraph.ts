@@ -27,6 +27,7 @@ export class EdgeWeightedGraph {
                 const w = Number(graphStrArr.shift())
                 const weight = Number(graphStrArr.shift())
                 const edge = new Edge(v, w, weight)
+                this.addEdge(edge)
             }
         }
     }
