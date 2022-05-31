@@ -1,10 +1,10 @@
 // 比较抽象类
-export interface Comparable {
-    compareTo(x: Comparable): number
+export interface Comparable<T> {
+    compareTo(x: Comparable<T>): number
 }
 
-export function isComparable(object: any): object is Comparable {
-    return (<Comparable>object)?.compareTo !== undefined
+export function isComparable(object: any): object is Comparable<any> {
+    return (<Comparable<any>>object)?.compareTo !== undefined
 }
 
 // 获取比较值

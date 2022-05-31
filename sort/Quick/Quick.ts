@@ -33,14 +33,14 @@ export class Quick extends Sort {
 
 
 export class Quick3way extends Sort {
-    static sort(a: Comparable[], lo?: number, hi?: number): void {
+    static sort(a: Comparable<any>[], lo?: number, hi?: number): void {
         if (lo === undefined && hi === undefined) {
             shuffle(a)
             this.sort(a, 0, a.length - 1)
         } else if (typeof lo === 'number' && typeof hi === 'number') {
             if (hi <= lo) return
             let lt = lo, i = lo + 1, gt = hi
-            let v: Comparable = a[lo]
+            let v: Comparable<any> = a[lo]
             while (i <= gt) {
                 const cmp = a[i].compareTo(v)
                 // a[i]比v小，则放置到v的右边，并增加i和lt的索引，相当于向下走接着对比

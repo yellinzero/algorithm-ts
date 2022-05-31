@@ -9,14 +9,14 @@ console.log('-----------Quick')
 Quick.show(arr)
 
 
-class NumberComparable extends Number {
+class NumberComparable implements Comparable<number>{
     compareTo(x: NumberComparable): number {
         return  Number(this) - Number(x)
     }
 }
 
 const arr2 = [1, 2, 5, 6, 11, 2, 5, 6, 7, 7, 8, 123, 5, 2, 2, 5, 6, 7, 7, 8, 123, 5, 27, 7, 8, 123, 51, 2, 5, 6, 7, 7, 8, 123, 5, 2, 2]
-const arrNew:Comparable[] = []
+const arrNew:Comparable<number>[] = []
 arr2.forEach(item=> {
     arrNew.push(new NumberComparable(item))
 })

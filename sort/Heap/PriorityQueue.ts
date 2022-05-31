@@ -106,6 +106,89 @@ export class MaxPQ<T> extends AbstractMaxPQ<T> {
     }
 }
 
+export class MinPQ<T> extends AbstractMinPQ<T> {
+    private pq: any[]
+    private N: number = 0
+
+    constructor() {
+        super()
+        this.pq = []
+    }
+
+    public isEmpty(): boolean {
+        return this.N === 0
+    }
+    public size(): number {
+        return this.N
+    }
+
+    // 插入数据，从最尾端上浮
+    public insert(v: T): void {
+        this.pq[++this.N] = v
+        this.swim(this.N)
+    }
+
+    public min(): T {
+        return this.pq[1]
+    }
+
+    /** 
+     * 删除并输出最小元素
+     * 将最小元素输出后置于数组最后清除，将最后元素置于堆最上放进行下沉重新排序
+     */
+    public delMin(): T {
+        const min = this.pq[1]
+        this.exch(1, this.N--)
+        this.pq[this.N + 1] = null
+        this.sink(1)
+        return min
+    }
+
+    private less(i: number, j: number): boolean {
+        if (isComparable(this.pq[i]) && isComparable(this.pq[j])) {
+            return this.pq[i].compareTo(this.pq[j]) > 0
+        } else if ((getType(this.pq[i]) === 'String' && getType(this.pq[j]) === 'String')
+            || (getType(this.pq[i]) === 'Number' && getType(this.pq[j]) === 'Number')) {
+            return this.pq[i] > this.pq[j]
+        } else {
+            console.error('请传入Comparable、Number、String类型，且保证传入值类型相同')
+            return false
+        }
+    }
+
+    private exch(i: number, j: number): void {
+        const t: T = this.pq[i]
+        this.pq[i] = this.pq[j]
+        this.pq[j] = t
+    }
+
+    /** 
+     * 上浮：若父节点比当前节点大则交换两节点，否则结束上浮
+     */
+    private swim(k: number): void {
+        while (k > 1 && this.less(Math.floor(k / 2), k)) {
+            this.exch(Math.floor(k / 2), k)
+            k = Math.floor(k / 2)
+        }
+    }
+
+    /** 
+     * 下沉：
+     * 先选出儿子节点中最小的
+     * 当前节点大于儿子节点中最小的，则互相交换
+     * 否则结束下沉
+     */
+    private sink(k: number): void {
+        while (2 * k <= this.N) {
+            let j: number = 2 * k
+            if (j < this.N && this.less(j, j + 1)) j++
+            if (!this.less(k, j)) break
+            this.exch(k, j)
+            k = j
+        }
+    }
+}
+
 export class IndexMinPQ<T> extends AbstractMinPQ<T> {
     private items: any[]
     private qp: number[]
