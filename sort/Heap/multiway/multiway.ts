@@ -1,6 +1,6 @@
 #!/usr/bin/env ts-node
 // 使用索引最小优先队列 实现 多向归并
-import { Index } from "../PriorityQueue"
+import { IndexMinPQ } from "../PriorityQueue"
 
 const fs = require('fs')
 const argvs = process.argv.splice(2)
