@@ -1,6 +1,10 @@
 import { Edge } from "../common/Edge"
 import { IndexMinPQ } from "../../sort/Heap/PriorityQueue"
 import { EdgeWeightedGraph } from "../common/EdgeWeightedGraph"
+
+/**
+ * 最小生成树Prim算法
+ */
 export class PrimMST {
     private edgeTo: Edge[]
     private distTo: number[]

@@ -1,6 +1,9 @@
 import { Edge } from "../common/Edge"
 import { MinPQ } from "../../sort/Heap/PriorityQueue"
 import { EdgeWeightedGraph } from "../common/EdgeWeightedGraph"
+/**
+ * 最小生成树Lazy Prim算法
+ */
 export class LazyPrimMST {
     private marked: boolean[]
     private mst: Edge[]
