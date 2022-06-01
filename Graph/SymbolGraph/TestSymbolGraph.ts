@@ -35,7 +35,7 @@ async function run() {
         if(line === 'close') {
             currRl.close()
         } else {
-            for(let w of (G.getAdj(sg.index(line)!) || [])) {
+            for(let w of (G.adj(sg.index(line)!) || [])) {
                 console.log('    ' + sg.name(w))
             }
             currRl.prompt()

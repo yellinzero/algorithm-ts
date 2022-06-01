@@ -14,7 +14,7 @@ export class DepthFirstOrder {
         this.post = []
         this.reversePost = []
         this.marked = []
-        for (let v = 0; v < G.getV(); v++) {
+        for (let v = 0; v < G.V(); v++) {
             if (!this.marked[v]) this.dfs(G, v)
         }
     }
@@ -22,7 +22,7 @@ export class DepthFirstOrder {
     private dfs(G: Digraph, v: number) {
         this.pre.push(v)
         this.marked[v] = true
-        for (let w of G.getAdj(v)) {
+        for (let w of G.adj(v)) {
             if (!this.marked[w]) {
                 this.dfs(G, w)
             }

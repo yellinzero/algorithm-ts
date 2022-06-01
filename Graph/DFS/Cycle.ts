@@ -9,7 +9,7 @@ export class Cycle {
 
     constructor(G: Graph) {
         this.marked = []
-        for (let s = 0; s < G.getV(); s++) {
+        for (let s = 0; s < G.V(); s++) {
             if (!this.marked[s]) {
                 this.dfs(G, s, s)
             }
@@ -18,7 +18,7 @@ export class Cycle {
 
     private dfs(G: Graph, v: number, u: number) {
         this.marked[v] = true;
-        for (let w of G.getAdj(v)) {
+        for (let w of G.adj(v)) {
             if (!this.marked[w]) {
                 this.dfs(G, w, v)
             } else if (w !== u) {

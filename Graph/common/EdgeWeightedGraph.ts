@@ -4,14 +4,14 @@ import { Edge } from "./Edge"
  * 加权无向图 
  */
 export class EdgeWeightedGraph {
-    private V: number = 0
-    private E: number = 0
-    private adj: Array<Edge>[] = []
+    private _V: number = 0
+    private _E: number = 0
+    private _adj: Array<Edge>[] = []
     constructor(input: number | string) {
         const init = (input: number) => {
-            this.V = input
-            for (let v = 0; v < this.V; v++) {
-                this.adj[v] = [] as Edge[]
+            this._V = input
+            for (let v = 0; v < this._V; v++) {
+                this._adj[v] = [] as Edge[]
             }
         }
         if (typeof input === 'number') {
@@ -35,27 +35,27 @@ export class EdgeWeightedGraph {
     addEdge(e: Edge) {
         const v = e.either()
         const w = e.other(v)
-        this.adj[v].unshift(e)
-        this.adj[w].unshift(e)
-        this.E++
+        this._adj[v].unshift(e)
+        this._adj[w].unshift(e)
+        this._E++
     }
 
-    getAdj(v: number): Edge[] {
-        return this.adj[v]
+    adj(v: number): Edge[] {
+        return this._adj[v]
     }
 
-    getV(): number {
-        return this.V
+    V(): number {
+        return this._V
     }
 
-    getE(): number {
-        return this.E
+    E(): number {
+        return this._E
     }
 
     edges(): Edge[] {
         const b = [] as Edge[]
-        for (let v = 0; v < this.V; v++) {
-            for (let e of this.getAdj(v)) {
+        for (let v = 0; v < this._V; v++) {
+            for (let e of this.adj(v)) {
                 if (e.other(v) > v) b.unshift(e)
             }
         }
@@ -64,11 +64,11 @@ export class EdgeWeightedGraph {
 
     // 图的字符串表示
     toString() {
-        let s = `${this.V} vertices, ${this.E} edges\n`
+        let s = `${this._V} vertices, ${this._E} edges\n`
         for (let e of this.edges()) {
             const v = e.either()
             const w = e.other(v)
-            s += `${v}-${w} ${e.getWeight()}\n`
+            s += `${v}-${w} ${e.weight()}\n`
         }
         return s
     }

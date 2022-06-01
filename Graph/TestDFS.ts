@@ -13,12 +13,12 @@ const search = new DepthFirstSearch(G, s)
 
 
 let marked = ''
-for (let v = 0; v < G.getV(); v++) {
+for (let v = 0; v < G.V(); v++) {
     if (search.marked(v)) marked += v + ' '
 }
 console.log(marked)
 
 let connect = ''
-if (search.count() != G.getV()) connect += 'NOT '
+if (search.count() != G.V()) connect += 'NOT '
 connect += 'connected'
 console.log(connect)

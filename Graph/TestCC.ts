@@ -18,7 +18,7 @@ const components: number[][] = []
 for (let i = 0; i < M; i++) {
     components[i] = []
 }
-for (let v = 0; v < G.getV(); v++) {
+for (let v = 0; v < G.V(); v++) {
     components[cc.getId(v)].unshift(v)
 }
 for (let i = 0; i < M; i++) {

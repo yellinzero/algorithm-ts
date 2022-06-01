@@ -16,7 +16,7 @@ for (let i = 1; i < argvs.length; i++) {
 const reachable: DirectedDFS = new DirectedDFS(G, sources)
 
 let printStr = ''
-for (let v = 0; v < G.getV(); v++) {
+for (let v = 0; v < G.V(); v++) {
     if (reachable.marked(v)) printStr += `${v} `
 }
 console.log(printStr)

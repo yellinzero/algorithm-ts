@@ -2,14 +2,14 @@
  * 有向图 
  */
 export class Digraph {
-    private V: number = 0
-    private E: number = 0
-    private adj: Array<number>[] = []
+    private _V: number = 0
+    private _E: number = 0
+    private _adj: Array<number>[] = []
     constructor(input: number | string) {
         const init = (input: number) => {
-            this.V = input
-            for (let v = 0; v < this.V; v++) {
-                this.adj[v] = [] as number[]
+            this._V = input
+            for (let v = 0; v < this._V; v++) {
+                this._adj[v] = [] as number[]
             }
         }
         if (typeof input === 'number') {
@@ -29,26 +29,26 @@ export class Digraph {
     }
 
     addEdge(v: number, w: number) {
-        this.adj[v].unshift(w)
-        this.E++
+        this._adj[v].unshift(w)
+        this._E++
     }
 
-    getAdj(v: number): number[] {
-        return this.adj[v]
+    adj(v: number): number[] {
+        return this._adj[v]
     }
 
-    getV(): number {
-        return this.V
+    V(): number {
+        return this._V
     }
 
-    getE(): number {
-        return this.E
+    E(): number {
+        return this._E
     }
 
     reverse(): Digraph {
-        const R: Digraph = new Digraph(this.V)
-        for (let v = 0; v < this.V; v++) {
-            for (let w of this.getAdj(v)) {
+        const R: Digraph = new Digraph(this._V)
+        for (let v = 0; v < this._V; v++) {
+            for (let w of this.adj(v)) {
                 R.addEdge(w, v)
             }
         }
@@ -57,11 +57,11 @@ export class Digraph {
 
     // 图的字符串表示
     toString() {
-        let s = `${this.V} vertices, ${this.E} edges\n`
-        for (let v = 0; v < this.V; v++) {
+        let s = `${this._V} vertices, ${this._E} edges\n`
+        for (let v = 0; v < this._V; v++) {
             s += v + ": "
-            for (let w = 0; w < this.adj[v].length; w++) {
-                s += this.adj[v][w] + " "
+            for (let w = 0; w < this._adj[v].length; w++) {
+                s += this._adj[v][w] + " "
             }
             s += "\n"
         }

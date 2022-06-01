@@ -21,7 +21,7 @@ export class BreadthFirstPaths {
         queue.push(s)
         while (queue.length > 0) {
             const v = queue.shift() as number
-            for (let w of G.getAdj(v)) {
+            for (let w of G.adj(v)) {
                 if (!this.marked[w]) {
                     this.edgeTo[w] = v
                     this.marked[w] = true

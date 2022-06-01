@@ -13,7 +13,7 @@ const search = new BreadthFirstPaths(G, s)
 
 
 
-for (let v = 0; v < G.getV(); v++) {
+for (let v = 0; v < G.V(); v++) {
     let path = `${s} to ${v}: `
     if(search.hasPathTo(v)) {
         for (let x of search.pathTo(v)!) {

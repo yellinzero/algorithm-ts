@@ -13,7 +13,7 @@ export class DirectedCycle {
         this.onStack = []
         this.edgeTo = []
         this.marked = []
-        for (let v = 0; v < G.getV(); v++) {
+        for (let v = 0; v < G.V(); v++) {
             if (!this.marked[v]) this.dfs(G, v)
         }
     }
@@ -21,7 +21,7 @@ export class DirectedCycle {
     private dfs(G: Digraph, v: number) {
         this.onStack[v] = true
         this.marked[v] = true
-        for (let w of G.getAdj(v)) {
+        for (let w of G.adj(v)) {
             if (this.hasCycle()) return;
             else if (!this.marked[w]) {
                 this.edgeTo[w] = v

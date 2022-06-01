@@ -7,16 +7,16 @@ import { Comparable } from "../../utils";
 export class Edge implements Comparable<Edge> {
     private v: number
     private w: number
-    private weight: number
+    private _weight: number
 
     constructor(v: number, w: number, weight: number) {
         this.v = v
         this.w = w
-        this.weight = weight
+        this._weight = weight
     }
 
-    getWeight() {
-        return this.weight
+    weight() {
+        return this._weight
     }
 
     either() {
@@ -30,13 +30,13 @@ export class Edge implements Comparable<Edge> {
     }
 
     compareTo(that: Edge): number {
-        if (this.getWeight() < that.getWeight()) return -1
-        else if (this.getWeight() > that.getWeight()) return 1
+        if (this.weight() < that.weight()) return -1
+        else if (this.weight() > that.weight()) return 1
         else return 0
     }
 
     toString() {
-        return `${this.v}-${this.w} ${this.weight.toFixed(2)}`
+        return `${this.v}-${this.w} ${this._weight.toFixed(2)}`
     }
 
 }

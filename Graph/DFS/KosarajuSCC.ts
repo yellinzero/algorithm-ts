@@ -24,7 +24,7 @@ export class KosarajuSCC {
     private dfs(G: Digraph, v: number) {
         this.marked[v] = true
         this.id[v] = this.count
-        for (let w of G.getAdj(v)) {
+        for (let w of G.adj(v)) {
             if (!this.marked[w]) this.dfs(G, w)
         }
     }

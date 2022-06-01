@@ -4,24 +4,24 @@
 import { Graph } from "../common/Graph"
 
 export class DepthFirstSearch {
-    private markeds: boolean[] = []
+    private _marked: boolean[] = []
     private N: number = 0
 
     constructor(G: Graph, s: number) {
-        this.markeds = []
+        this._marked = []
         this.dfs(G, s)
     }
 
     dfs(G: Graph, v: number) {
-        this.markeds[v] = true;
+        this._marked[v] = true;
         this.N++
-        for (let w of G.getAdj(v)) {
-            if (!this.markeds[w]) this.dfs(G, w)
+        for (let w of G.adj(v)) {
+            if (!this._marked[w]) this.dfs(G, w)
         }
     }
 
     marked(v: number): boolean {
-        return this.markeds[v]
+        return this._marked[v]
     }
 
     count(): number {

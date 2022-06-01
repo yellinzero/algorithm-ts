@@ -25,7 +25,7 @@ export class LazyPrimMST {
 
     private visit(G: EdgeWeightedGraph, v: number) {
         this.marked[v] = true
-        for (let e of G.getAdj(v)) {
+        for (let e of G.adj(v)) {
             if (!this.marked[e.other(v)]) this.pq.insert(e)
         }
     }
@@ -37,7 +37,7 @@ export class LazyPrimMST {
     weight() {
         let weight = 0
         for (let e of this.edges()) {
-            weight += e.getWeight()
+            weight += e.weight()
         }
         return weight
     }

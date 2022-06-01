@@ -11,7 +11,7 @@ export class CC {
     constructor(G: Graph) {
         this.marked = []
         this.id = []
-        for (let s = 0; s < G.getV(); s++) {
+        for (let s = 0; s < G.V(); s++) {
             if (!this.marked[s]) {
                 this.dfs(G, s)
                 this.count++
@@ -22,7 +22,7 @@ export class CC {
     private dfs(G: Graph, v: number) {
         this.marked[v] = true
         this.id[v] = this.count
-        for (let w of G.getAdj(v)) {
+        for (let w of G.adj(v)) {
             if (!this.marked[w]) this.dfs(G, w)
         }
     }

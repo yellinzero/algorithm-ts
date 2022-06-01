@@ -10,9 +10,9 @@ export class TwoColor {
 
     constructor(G: Graph) {
         this.marked = []
-        this.color = new Array(G.getV())
+        this.color = new Array(G.V())
         this.color.fill(false)
-        for (let s = 0; s < G.getV(); s++) {
+        for (let s = 0; s < G.V(); s++) {
             if (!this.marked[s]) {
                 this.dfs(G, s)
             }
@@ -21,7 +21,7 @@ export class TwoColor {
 
     private dfs(G: Graph, v: number) {
         this.marked[v] = true
-        for (let w of G.getAdj(v)) {
+        for (let w of G.adj(v)) {
             if (!this.marked[w]) {
                 this.color[w] = this.color[v]
                 this.dfs(G, w)

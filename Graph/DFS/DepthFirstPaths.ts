@@ -17,7 +17,7 @@ export class DepthFirstPaths {
 
     dfs(G: Graph, v: number) {
         this.marked[v] = true;
-        for (let w of G.getAdj(v)) {
+        for (let w of G.adj(v)) {
             if (!this.marked[w]) {
                 this.edgeTo[w] = v
                 this.dfs(G, w)
