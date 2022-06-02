@@ -2,26 +2,27 @@
  * 拓扑排序
  *  */
 import { Digraph } from "../common/Digraph";
+import { EdgeWeightedDigraph } from "../common/EdgeWeightedDigraph";
 import { DepthFirstOrder } from "./DepthFirstOrder";
 import { DirectedCycle } from "./DirectedCycle";
 
 export class Topological {
-    private order: number[] | null = null
+    private _order: number[] | null = null
 
-    constructor(G: Digraph) {
+    constructor(G: Digraph | EdgeWeightedDigraph) {
         const cyclefinder = new DirectedCycle(G)
         if (!cyclefinder.hasCycle()) {
             const dfs = new DepthFirstOrder(G)
-            this.order = dfs.getReversePost()
+            this._order = dfs.getReversePost()
         }
     }
 
-    getOrder(): number[] | null {
-        return this.order
+    order(): number[] | null {
+        return this._order
     }
 
     isDAG(): boolean {
-        return this.order !== null
+        return this._order !== null
     }
 
 }

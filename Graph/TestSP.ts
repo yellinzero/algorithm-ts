@@ -1,10 +1,11 @@
 #!/usr/bin/env ts-node
 
 import { EdgeWeightedDigraph } from './common/EdgeWeightedDigraph'
+import { AcyclicSP } from './SP/AcyclicSP'
 import { DijkstraSP } from './SP/DijkstraSP'
 
 interface SPType {
-    [key: string]: typeof DijkstraSP
+    [key: string]: typeof DijkstraSP | typeof AcyclicSP
 }
 const argvs = process.argv.splice(2)
 const fs = require('fs')
@@ -15,6 +16,7 @@ const s = Number(argvs[2])
 const G = new EdgeWeightedDigraph(graphInfo)
 const SP: SPType = {
     'DijkstraSP': DijkstraSP,
+    'AcyclicSP': AcyclicSP,
 }
 const sp = new SP[SPObject](G, s)
 
