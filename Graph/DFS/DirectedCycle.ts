@@ -1,7 +1,6 @@
 /**
  * 有向图的环检测 
  * */
-import { getType } from "../../utils";
 import { Digraph } from "../common/Digraph";
 import { EdgeWeightedDigraph } from "../common/EdgeWeightedDigraph";
 
@@ -39,7 +38,7 @@ export class DirectedCycle {
             }
         }
 
-        if(G instanceof EdgeWeightedDigraph) {
+        if (G instanceof EdgeWeightedDigraph) {
             for (let w of G.adj(v)) {
                 if (this.hasCycle()) return;
                 else if (!this.marked[w.to()]) {
