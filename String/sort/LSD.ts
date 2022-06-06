@@ -1,3 +1,6 @@
+/**
+ * 低位优先字符串排序
+ */
 export class LSD {
     static sort(a: string[], W: number) {
         const N = a.length

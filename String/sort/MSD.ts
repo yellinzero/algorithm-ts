@@ -1,4 +1,7 @@
-import { Insertion } from "../sort"
+/**
+ * 高位优先字符串排序
+ */
+import { Insertion } from "../../sort"
 
 export class MSD {
     private static R = 256
