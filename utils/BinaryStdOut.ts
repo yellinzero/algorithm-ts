@@ -95,10 +95,10 @@ export class BinaryStdOut {
             }
         } else if (typeof x === 'number') {
             // js只有number类型占8个字节
-            this.writeByte(((x >>> 56) & 0xff));
-            this.writeByte(((x >>> 48) & 0xff));
-            this.writeByte(((x >>> 40) & 0xff));
-            this.writeByte(((x >>> 32) & 0xff));
+            // this.writeByte(((x >>> 56) & 0xff));
+            // this.writeByte(((x >>> 48) & 0xff));
+            // this.writeByte(((x >>> 40) & 0xff));
+            // this.writeByte(((x >>> 32) & 0xff));
             this.writeByte((x >>> 24) & 0xff);
             this.writeByte((x >>> 16) & 0xff);
             this.writeByte((x >>> 8) & 0xff);
@@ -106,8 +106,11 @@ export class BinaryStdOut {
         }
     }
 
-    static flush() {
+    static close() {
         this.clearBuffer()
+        this.isInitialized = false;
         this.out.destroy()
     }
+
+
 }
