@@ -1,3 +1,8 @@
+/**
+ * 这工具因为类型的类型存储模式跟java不一样，所以移植不算很好
+ * 只是为了保证跟书的api尽量一致，提高效率，所以做了简单的封装
+ */
+
 const { EOL } = require('os')
 const EOLCode = [] as number[]
 for (let i = 0; i < EOL.length; i++) {
@@ -78,8 +83,19 @@ export class BinaryStdIn {
         return bit
     }
 
-    static async readChar(r?: number): Promise<void | string> {
-        if (r === undefined) {
+    static async readChar(r?: number): Promise<string> {
+        if (r !== undefined) {
+            if (r < 1 || r > 16) throw new Error("Illegal value of r = " + r)
+            if (r === 8) return this.readChar()
+
+            let x = 0
+            for (let i = 0; i < r; i++) {
+                x <<= 1
+                const bit = await this.readBoolean()
+                if (bit) x |= 1
+            }
+            return String.fromCharCode(x)
+        } else {
             if (await this.isEmpty()) throw new Error('Reading from empty input stream')
             // 当前为完整字节
             if (this.n === 8) {
@@ -98,17 +114,6 @@ export class BinaryStdIn {
             // 合并
             x |= (this.buffer >>> this.n)
             return String.fromCharCode(x & 0xff)
-        } else {
-            if (r < 1 || r > 16) throw new Error("Illegal value of r = " + r)
-            if (r === 8) return this.readChar()
-
-            let x = 0
-            for (let i = 0; i < r; i++) {
-                x <<= 1
-                const bit = await this.readBoolean()
-                if (bit) x |= 1
-            }
-            return String.fromCharCode(x)
         }
     }
 
@@ -120,5 +125,38 @@ export class BinaryStdIn {
             sb += c
         }
         return sb
+    }
+
+    static async readShort() {
+        let x = 0;
+        for (let i = 0; i < 2; i++) {
+            const c = await this.readChar()
+            x <<= 8
+            x |= c!.charCodeAt(0)
+        }
+        return x
+    }
+
+    static async readInt(r?: number): Promise<number> {
+        if (r !== undefined) {
+            if (r < 1 || r > 32) throw new Error("Illegal value of r = " + r);
+            if (r === 32) return await this.readInt()
+
+            let x = 0
+            for (let i = 0; i < r; i++) {
+                x <<= 1
+                const bit = await this.readBoolean()
+                if (bit) x |= 1
+            }
+            return x
+        } else {
+            let x = 0;
+            for (let i = 0; i < 4; i++) {
+                const c = await this.readChar()
+                x <<= 8
+                x |= c!.charCodeAt(0)
+            }
+            return x
+        }
     }
 }

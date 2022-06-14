@@ -1,8 +1,9 @@
 #!usr/env/bin ts-node
 
 import { BinaryStdIn } from './BinaryStdIn'
-
-async function run () {
-    console.log(await BinaryStdIn.readString())
+const { Writable } = require('stream')
+async function run() {
+process.stdout.write('abc')
+  
 }
 run()
