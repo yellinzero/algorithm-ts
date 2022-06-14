@@ -25,3 +25,8 @@ export * from './graph'
 export * from "./Comparable"
 // 命令行进度条
 export * from "./progress"
+// 字母表
+export * from "./Alphabet"
+// 二进制输入输出
+export * from "./BinaryStdIn"
+export * from "./BinaryStdOut"

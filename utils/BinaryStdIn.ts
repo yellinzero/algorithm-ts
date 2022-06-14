@@ -53,7 +53,6 @@ export class BinaryStdIn {
                 throw new Error('EOF')
             }
         } catch (error) {
-            console.log('EOF')
             this.buffer = this.EOF
             this.n = -1
         }
