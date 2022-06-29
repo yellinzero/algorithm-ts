@@ -22,9 +22,9 @@ export class BinaryStdOut {
 
     private static clearBuffer() {
         if (!this.isInitialized) this.initialize();
-
         if (this.n == 0) return;
-        if (this.n > 0) this.buffer <<= 8 - this.n;
+
+        if (this.n > 0) this.buffer <<= (8 - this.n);
         this.out.write(String.fromCharCode(this.buffer));
         this.n = 0;
         this.buffer = 0;

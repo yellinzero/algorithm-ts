@@ -16,12 +16,15 @@ export class BinaryStdIn {
     private static buffer: number
     private static n: number
     private static isInitialized: boolean
+    private static buf: Buffer
 
     static initialize() {
         return new Promise((resolve) => {
+            process.stdin.setEncoding('utf8')
             process.stdin.on('data', chunk => {
                 this.chunks = []
-                const chunksWithEOL = Array.from(chunk)
+                this.buf = Buffer.from(chunk);
+                const chunksWithEOL = Array.from(this.buf)
                 for (let i = 0; i < chunksWithEOL.length; i++) {
                     if (EOLCode.length === 2) {
                         if (chunksWithEOL[i] === EOLCode[0] && chunksWithEOL[i + 1] === EOLCode[1]) {
@@ -104,7 +107,6 @@ export class BinaryStdIn {
                 this.fillBuffer()
                 return String.fromCharCode(x & 0xff)
             }
-
             // 字节不完整时取当前buffer后n比特和下一个buffer的前8-n个比特
             let x = this.buffer
             x <<= (8 - this.n)
